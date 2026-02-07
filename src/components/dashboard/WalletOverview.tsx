@@ -1,13 +1,27 @@
 import { useState } from 'react';
-import { Wallet, ArrowUpRight, ArrowDownLeft } from 'lucide-react';
+import { Wallet, ArrowUpRight, ArrowDownLeft, Loader2 } from 'lucide-react';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { WithdrawDialog } from './WithdrawDialog';
+import { toast } from '@/hooks/use-toast';
 
 export function WalletOverview() {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const [withdrawOpen, setWithdrawOpen] = useState(false);
+  const [depositLoading, setDepositLoading] = useState(false);
+
+  const handleDepositClick = async () => {
+    setDepositLoading(true);
+    // Simulate network request
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setDepositLoading(false);
+    toast({
+      variant: "destructive",
+      title: isRTL ? "خطأ في الشبكة" : "Network Error",
+      description: isRTL ? "مشكلة في الشبكة. يرجى المحاولة مرة أخرى لاحقاً." : "Network problem. Please try again later.",
+    });
+  };
 
   return (
     <>
@@ -34,8 +48,16 @@ export function WalletOverview() {
         </div>
 
         <div className="flex gap-3">
-          <Button className="flex-1 bg-primary text-primary-foreground btn-glow">
-            <ArrowDownLeft className="w-4 h-4 mr-2" />
+          <Button 
+            className="flex-1 bg-primary text-primary-foreground btn-glow"
+            onClick={handleDepositClick}
+            disabled={depositLoading}
+          >
+            {depositLoading ? (
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            ) : (
+              <ArrowDownLeft className="w-4 h-4 mr-2" />
+            )}
             {t('wallet.deposit')}
           </Button>
           <Button 
