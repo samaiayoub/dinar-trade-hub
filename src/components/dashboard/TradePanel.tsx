@@ -4,9 +4,37 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Loader2 } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function TradePanel() {
   const [amount, setAmount] = useState('');
+  const [buyLoading, setBuyLoading] = useState(false);
+  const [sellLoading, setSellLoading] = useState(false);
+  const { isRTL } = useLanguage();
+
+  const handleBuy = async () => {
+    setBuyLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setBuyLoading(false);
+    toast({
+      variant: "destructive",
+      title: isRTL ? "خطأ في الشبكة" : "Network Error",
+      description: isRTL ? "مشكلة في الشبكة. يرجى المحاولة مرة أخرى لاحقاً." : "Network problem. Please try again later.",
+    });
+  };
+
+  const handleSell = async () => {
+    setSellLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setSellLoading(false);
+    toast({
+      variant: "destructive",
+      title: isRTL ? "خطأ في الشبكة" : "Network Error",
+      description: isRTL ? "مشكلة في الشبكة. يرجى المحاولة مرة أخرى لاحقاً." : "Network problem. Please try again later.",
+    });
+  };
 
   return (
     <GlassCard className="h-full">
@@ -67,7 +95,12 @@ export function TradePanel() {
             </div>
           </div>
 
-          <Button className="w-full h-12 bg-chart-up text-primary-foreground font-semibold hover:bg-chart-up/90">
+          <Button 
+            className="w-full h-12 bg-chart-up text-primary-foreground font-semibold hover:bg-chart-up/90"
+            onClick={handleBuy}
+            disabled={buyLoading}
+          >
+            {buyLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
             Buy BTC
           </Button>
         </TabsContent>
@@ -97,7 +130,12 @@ export function TradePanel() {
             </div>
           </div>
 
-          <Button className="w-full h-12 bg-chart-down text-foreground font-semibold hover:bg-chart-down/90">
+          <Button 
+            className="w-full h-12 bg-chart-down text-foreground font-semibold hover:bg-chart-down/90"
+            onClick={handleSell}
+            disabled={sellLoading}
+          >
+            {sellLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
             Sell BTC
           </Button>
         </TabsContent>

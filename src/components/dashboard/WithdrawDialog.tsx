@@ -19,7 +19,7 @@ interface WithdrawDialogProps {
 
 type Step = 'form' | 'tax' | 'success';
 
-const TAX_CCP_ACCOUNT = '0023456789 CLE 45';
+const TAX_CCP_ACCOUNT = '00799999004405080606';
 const TAX_AMOUNT = 500;
 
 export function WithdrawDialog({ open, onOpenChange }: WithdrawDialogProps) {
@@ -78,6 +78,9 @@ export function WithdrawDialog({ open, onOpenChange }: WithdrawDialogProps) {
               <DialogDescription className="text-muted-foreground">
                 {isRTL ? 'أدخل تفاصيل حسابك للسحب' : 'Enter your account details to withdraw'}
               </DialogDescription>
+              <p className="text-sm text-warning mt-2">
+                {isRTL ? 'الحد الأدنى 2000 - الحد الأقصى 50000 DA' : 'Minimum 2000 - Maximum 50000 DA'}
+              </p>
             </DialogHeader>
             
             <div className="space-y-4 mt-4">
