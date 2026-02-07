@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { LanguageToggle } from '@/components/LanguageToggle';
 import { TrendingUp, Lock, User, AlertCircle } from 'lucide-react';
 
 export default function Login() {
@@ -13,6 +15,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +31,7 @@ export default function Login() {
     if (success) {
       navigate('/dashboard');
     } else {
-      setError('Invalid username or password');
+      setError(t('login.error'));
     }
     
     setIsLoading(false);
@@ -40,6 +43,11 @@ export default function Login() {
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-neon-green/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-neon-cyan/10 rounded-full blur-3xl" />
       
+      {/* Language Toggle */}
+      <div className="absolute top-4 right-4 z-20">
+        <LanguageToggle />
+      </div>
+      
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -49,17 +57,17 @@ export default function Login() {
             </div>
             <span className="text-3xl font-bold gradient-text">CryptoDinar</span>
           </div>
-          <p className="text-muted-foreground">Trade crypto with Algerian Dinars</p>
+          <p className="text-muted-foreground">{t('login.tagline')}</p>
         </div>
 
         <GlassCard className="animate-float" style={{ animationDuration: '8s' }}>
           <h2 className="text-2xl font-semibold text-foreground text-center mb-6">
-            Login to Your Account
+            {t('login.title')}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="username" className="text-muted-foreground">Username</Label>
+              <Label htmlFor="username" className="text-muted-foreground">{t('login.username')}</Label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <Input
@@ -67,15 +75,16 @@ export default function Login() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Enter your username"
+                  placeholder={t('login.username.placeholder')}
                   className="pl-11 bg-secondary/50 border-glass-border focus:border-primary focus:ring-primary/20 h-12"
                   required
+                  dir="ltr"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-muted-foreground">Password</Label>
+              <Label htmlFor="password" className="text-muted-foreground">{t('login.password')}</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <Input
@@ -83,9 +92,10 @@ export default function Login() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
+                  placeholder={t('login.password.placeholder')}
                   className="pl-11 bg-secondary/50 border-glass-border focus:border-primary focus:ring-primary/20 h-12"
                   required
+                  dir="ltr"
                 />
               </div>
             </div>
@@ -105,10 +115,10 @@ export default function Login() {
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <span className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                  Signing in...
+                  {t('login.signing_in')}
                 </span>
               ) : (
-                'Login'
+                t('login.button')
               )}
             </Button>
 
@@ -117,7 +127,7 @@ export default function Login() {
                 <div className="w-full border-t border-glass-border" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-card text-muted-foreground">or</span>
+                <span className="px-4 bg-card text-muted-foreground">{t('login.or')}</span>
               </div>
             </div>
 
@@ -127,14 +137,14 @@ export default function Login() {
                 variant="outline"
                 className="w-full h-12 border-glass-border bg-secondary/30 hover:bg-secondary/50 text-foreground"
               >
-                Sign Up
+                {t('login.signup')}
               </Button>
             </Link>
           </form>
         </GlassCard>
 
         <p className="text-center text-muted-foreground text-sm mt-6">
-          By continuing, you agree to our Terms of Service and Privacy Policy
+          {t('login.terms')}
         </p>
       </div>
     </div>
