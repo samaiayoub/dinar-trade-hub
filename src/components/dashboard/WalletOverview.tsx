@@ -31,19 +31,19 @@ export function WalletOverview() {
             <Wallet className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">{t('wallet.total_balance')}</p>
-            <h2 className="text-3xl font-bold text-foreground">261,000 <span className="text-lg font-normal text-muted-foreground">DZD</span></h2>
+          <p className="text-sm text-muted-foreground">{t('wallet.total_balance')}</p>
+            <h2 className="text-3xl font-bold text-foreground">240294 <span className="text-lg font-normal text-muted-foreground">DA</span></h2>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-3 mb-6">
           <div className="bg-secondary/50 rounded-lg p-3">
             <p className="text-xs text-muted-foreground mb-1">{t('wallet.available')}</p>
-            <p className="text-lg font-semibold text-foreground">245,000 DZD</p>
+            <p className="text-lg font-semibold text-foreground">224294 DA</p>
           </div>
           <div className="bg-secondary/50 rounded-lg p-3">
             <p className="text-xs text-muted-foreground mb-1">{t('wallet.in_orders')}</p>
-            <p className="text-lg font-semibold text-foreground">16,000 DZD</p>
+            <p className="text-lg font-semibold text-foreground">16000 DA</p>
           </div>
         </div>
 
