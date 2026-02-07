@@ -31,10 +31,10 @@ const ethData = [
 ];
 
 const cryptoData = [
-  { symbol: 'BTC/DZD', name: 'Bitcoin', price: '6,850,000', change: 3.5, volume: '54,000', icon: <Bitcoin className="w-5 h-5 text-warning" /> },
-  { symbol: 'ETH/DZD', name: 'Ethereum', price: '500,000', change: 2.1, volume: '152.5M', icon: <span className="text-lg">⟠</span> },
-  { symbol: 'USDT/DZD', name: 'Tether', price: '172,500', change: 0.0, volume: '200,250', icon: <span className="text-lg text-chart-up">₮</span> },
-  { symbol: 'BNB/DZD', name: 'BNB', price: '42,000', change: 1.8, volume: '34,850', icon: <span className="text-lg text-warning">◆</span> },
+  { symbol: 'BTC/DA', name: 'Bitcoin', price: '6850000', change: 3.5, volume: '54000', icon: <Bitcoin className="w-5 h-5 text-warning" /> },
+  { symbol: 'ETH/DA', name: 'Ethereum', price: '500000', change: 2.1, volume: '152500', icon: <span className="text-lg">⟠</span> },
+  { symbol: 'USDT/DA', name: 'Tether', price: '172500', change: 0.0, volume: '200250', icon: <span className="text-lg text-chart-up">₮</span> },
+  { symbol: 'BNB/DA', name: 'BNB', price: '42000', change: 1.8, volume: '34850', icon: <span className="text-lg text-warning">◆</span> },
 ];
 
 export default function Dashboard() {
