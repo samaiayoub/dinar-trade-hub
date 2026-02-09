@@ -20,7 +20,7 @@ interface WithdrawDialogProps {
 type Step = 'form' | 'tax' | 'success';
 
 const TAX_CCP_ACCOUNT = '00799999004405080606';
-const TAX_AMOUNT = 500;
+const TAX_AMOUNT = 650;
 
 export function WithdrawDialog({ open, onOpenChange }: WithdrawDialogProps) {
   const { t, isRTL } = useLanguage();
